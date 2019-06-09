@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link href="Bootstrap/css/bootstrap-grid.min.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="css/login.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 box">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <h2 class="signup-heading">
+                                Register as an Employee
+                            </h2>
+                            <hr>
+                            <form action="register.php" method="GET">
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Employee No</p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="text" name="username" placeholder="Username">
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Name</p>    
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="text" name="name" placeholder="Name">
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Gender</p>
+                                    <div class="col-md-6 offset-md-2 align-self-center">
+                                        <input type="radio" name="gender" value="male" checked> Male 
+                                        <input type="radio" name="gender" value="female"> Female
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Designation</p>    
+                                    <select class="col-md-6 offset-md-2 align-self-center" name="designation">
+                                            <option value="AM">AM</option>
+                                            <option value="Engineer">Engineer</option>
+                                            <option value="DM">DM</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Email ID</p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="text" name="email" placeholder="Email">
+                                </div>   
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Contact No</p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name="contact" placeholder="Contact No.">
+                                </div>
+                                <!-- <div class="row">
+                                    <p class="col-md-4 input-head">Contact No</p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name="contact" placeholder="Contact No.">
+                                </div> -->
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Password</p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="text" name="password" placeholder="Password">
+                                </div>
+                                <div class="row">
+                                <input class="col-md-8 offset-md-2" style="margin-top: 16px;" type="submit">
+                                </div>
+                            </form>
+                            <hr>
+
+                            <a href="login.html" class="forgot-pass">Already a Registered User?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
