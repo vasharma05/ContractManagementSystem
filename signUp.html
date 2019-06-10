@@ -20,7 +20,7 @@
                                 Register as an Employee
                             </h2>
                             <hr>
-                            <form action="register.php" method="GET">
+                            <form action="php/register.php" method="GET">
                                 <div class="row">
                                     <p class="col-md-4 input-head">Employee No</p>
                                     <input class="col-md-6 offset-md-2 align-self-center" type="text" name="username" placeholder="Username">
@@ -34,6 +34,7 @@
                                     <div class="col-md-6 offset-md-2 align-self-center">
                                         <input type="radio" name="gender" value="male" checked> Male 
                                         <input type="radio" name="gender" value="female"> Female
+                                        <input type="radio" name="gender" value="other"> Other
                                     </div>
                                 </div>
                                 <div class="row">
@@ -46,7 +47,7 @@
                                 </div>
                                 <div class="row">
                                     <p class="col-md-4 input-head">Email ID</p>
-                                    <input class="col-md-6 offset-md-2 align-self-center" type="text" name="email" placeholder="Email">
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="email" name="email" placeholder="Email">
                                 </div>   
                                 <div class="row">
                                     <p class="col-md-4 input-head">Contact No</p>
@@ -58,7 +59,7 @@
                                 </div> -->
                                 <div class="row">
                                     <p class="col-md-4 input-head">Password</p>
-                                    <input class="col-md-6 offset-md-2 align-self-center" type="text" name="password" placeholder="Password">
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="password" name="password" placeholder="Password">
                                 </div>
                                 <div class="row">
                                 <input class="col-md-8 offset-md-2" style="margin-top: 16px;" type="submit">
@@ -66,7 +67,7 @@
                             </form>
                             <hr>
 
-                            <a href="login.html" class="forgot-pass">Already a Registered User?</a>
+                            <a href="login_form.php" class="forgot-pass">Already a Registered User?</a>
                         </div>
                     </div>
                 </div>

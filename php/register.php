@@ -24,5 +24,6 @@ if($result===false){
 }else{
     echo "Updated";
 }
+header("Location: ../login.html");
 
 ?>
