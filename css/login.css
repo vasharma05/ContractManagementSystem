@@ -1,3 +1,6 @@
+body{
+    background-color: linear-gradient(135deg, rgba(0,255,16,1), rgba(105,9,121,1));
+}
 a{
     text-decoration: none;
     text-align: right;
@@ -5,10 +8,11 @@ a{
 
 .box{
     height: auto;
+    padding: 2% 0;
     /* display: flex;
     justify-content: center;    
     align-items: center; */
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 8px;
 }
 form{
@@ -56,6 +60,7 @@ input[type=submit]{
     background-color: green;
     color: white;
     box-shadow: 0 0 0 black;
+    margin-bottom: 48px;
 }
 input::placeholder{
     text-align: center;
