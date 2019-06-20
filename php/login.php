@@ -22,6 +22,7 @@ session_start();
 if($row[0]){
     $_SESSION["employee_id"] = $row[0];
     $_SESSION["user"] = $row[1];
+    $_SESSION["login_status"] = "logged";
     header("Location: ../vendor.php");
 }else{
     $_SESSION['login_error']="No user found!";

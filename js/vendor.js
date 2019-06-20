@@ -5,59 +5,16 @@ var report =new Boolean(true);
 
 function clicked_button(i) {
     if(i==0){
-        document.getElementById("add_form").classList.toggle("disabled");
-        // if(add_form){
-        //     add_form = false;
-        // }else{
-        //     add_form = false;
-        // }
+        $('#add_form').slideDown(1000);
+        $('#update_form').slideUp(1000);
     }else if(i==1){
-        document.getElementById("update_form").classList.toggle("disabled");
+        $('#add_form').slideUp(1000);
+        $('#update_form').slideDown(1000);
     }else{
-        document.getElementById("report").classList.toggle("disabled");
+        $('#add_form').slideUp(1000);
+        $('#update_form').slideUp(1000);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -119,6 +76,12 @@ update_endInput.addEventListener("change", (e)=>{
     }   
 
 });
+function search_id() {
+    var id;
+    id = $('#search_id').val();
+    window.location.href = "localhost/CMS/search_id.php?";
+}
+
 
 document.getElementById('id').value = Math.floor(Math.random()*90000) + 10000;
 document.getElementById('id').placeholder = document.getElementById('id').value;

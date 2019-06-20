@@ -11,23 +11,7 @@
     <link href="css/login.css" type="text/css" rel="stylesheet">
     <link href="css/vendor.css" type="text/css" rel="stylesheet"> 
 
-    <script>
-        function clicked_button(i) {
-    if(i==0){
-        document.getElementById("add_form").classList.toggle("disabled");
-        // if(add_form){
-        //     add_form = false;
-        // }else{
-        //     add_form = false;
-        // }
-    }else if(i==1){
-        document.getElementById("update_form").classList.toggle("disabled");
-    }else{
-        document.getElementById("report").classList.toggle("disabled");
-    }
-}
-
-    </script>
+    
     <?php
             
             session_start();
@@ -38,13 +22,18 @@
             <?php 
                 unset($_SESSION["status"]);
             }
-    ?>
+            if(!isset($_SESSION["login_status"])){
+                header("Location: login_form.php");
+            } ?>
+               
 </head>
 <body>
     <div class="container">
         <div class = "row">
             <img src="img/tcil.png" class="col-md-2" width="150px" height="150px">
-            <h4 class="col-md-4 offset-md-6 align-self-center" style="text-align: right; " > Welcome <?php echo $_SESSION["user"] ?>!</h4>
+            <div class="col-md-4 offset-md-6 align-self-center" style="text-align: right; ">
+                <h4> Welcome <?php echo $_SESSION["user"] ?>!</h4>
+                <a href="php/sign_out.php">Sign Out</a>
     </div>
     
     <section class="container" style="margin-top: 24px;">
@@ -54,7 +43,7 @@
             <button onclick='clicked_button(2)' class="col-md-2 offset-md-2 col-xs-10 offset-xs-1 report-button">Reports</button>
         </div>
     </section>
-    <section class="container disabled" id = "add_form">
+    <section class="container" id = "add_form">
         <h2>Enter the Vendor's details</h2>
         <hr>
         <div class="row">
@@ -96,35 +85,42 @@
                 <form class="col-10 offset-1" action="php/update-vendor.php" method="POST">
                     <div class="row">
                         <p class="col-md-4 input-head">Unique Id</p>    
-                        <input class="col-md-6 offset-md-2 align-self-center" type="number" name="id">
+                        <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" name="id" id="update_id">
+                        <button id="search_id" class="col-10 offset-1 align-self-center" onclick="search_id()">Search</button>
                     </div>
-                    <div class="row">
-                        <p class="col-md-4 input-head">Name</p>    
-                        <input class="col-md-6 offset-md-2 align-self-center" type="text" name="name" placeholder="Name">
-                    </div>
-                    <div class="row">
-                        <p class="col-md-4 input-head">Contract Start Date</p>    
-                        <input class="col-md-6 offset-md-2 align-self-center" type="date" id="update_start_date" name="start_date" placeholder="Start Date">
-                    </div>
-                    <div class="row">
-                        <p class="col-md-4 input-head">Contract End Date</p>    
-                        <input class="col-md-6 offset-md-2 align-self-center" type="date" id="update_end_date" name="end_date" placeholder="End Date">
-                    </div>
-                    <div class="row">
-                        <p class="col-md-4 input-head">Period</p>    
-                        <input class="col-md-6 offset-md-2 align-self-center" style="background-color: rgb(200,200,200);" id="update_period" type="text" name="period" readonly="readonly">
-                    </div>
-                    <div class="row">
-                        <input class="col-md-8 offset-md-2" style="margin-top: 16px;" type="submit">
-                    </div>
+                    <?php 
+                    if(isset($_SESSION["info_found"])){
+                        if($_SESSION["info_found"]=== "Not Found"){ ?>
+                            <p style="color: red; text-align: center">Not Found</p>
+                        <?php }else{ ?>
+                        <div class="row">
+                            <p class="col-md-4 input-head">Name</p>    
+                            <input class="col-md-6 offset-md-2 align-self-center" type="text" name="name" placeholder="Name">
+                        </div>
+                        <div class="row">
+                            <p class="col-md-4 input-head">Contract Start Date</p>    
+                            <input class="col-md-6 offset-md-2 align-self-center" type="date" id="update_start_date" name="start_date" placeholder="Start Date">
+                        </div>
+                        <div class="row">
+                            <p class="col-md-4 input-head">Contract End Date</p>    
+                            <input class="col-md-6 offset-md-2 align-self-center" type="date" id="update_end_date" name="end_date" placeholder="End Date">
+                        </div>
+                        <div class="row">
+                            <p class="col-md-4 input-head">Period</p>    
+                            <input class="col-md-6 offset-md-2 align-self-center" style="background-color: rgb(200,200,200);" id="update_period" type="text" name="period" readonly="readonly">
+                        </div>
+                        <div class="row">
+                            <input class="col-md-8 offset-md-2" style="margin-top: 16px;" type="submit">
+                        </div>
+                    <?php }} ?>
                 </form>
                 </div>
             </div>
         </section>
 
-            <section class="container"  id="report">
-                <h2>Reports</h2>
-                <hr>
+<section class="container"  id="report">
+    <h2>Reports</h2>
+    <hr>
        <?php
         $con = mysqli_connect("localhost", "root","","cms");
        $query = "SELECT * FROM vendors";
@@ -154,7 +150,7 @@
                         <td <?php 
                                     $last_date = $rows['end_date']." 00:00:00";
                                     $last_date = strtotime($last_date);
-                                    $diff = $current_date - $last_date;
+                                    $diff = abs($current_date - $last_date);
                                     $diff=$diff/86400;
                                     if($diff<=30){
                                         if($diff<=15){ ?>
@@ -169,12 +165,10 @@
               </table>
               </div>
 
-                                </section>
+</section>
 
-              <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-        <script src="js/vendor.js"></script>
+              <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script src="js/vendor.js"></script>
+
 </body>
 </html>
