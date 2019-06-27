@@ -17,7 +17,7 @@
             session_start();
             if(isset($_SESSION["status"])){ ?>
                 <script>
-                    alert("<?php echo $_SESSION["status"]; ?>");
+                    promt("<?php echo $_SESSION["status"]; ?>");
                 </script>
             <?php 
                 unset($_SESSION["status"]);
@@ -81,9 +81,19 @@
                 </div>
                 <div class="row">
                     <p class="col-md-4 input-head">Period</p>    
-                    <input class="col-md-6 offset-md-2 align-self-center" style="background-color: rgb(200,200,200);" type="text" id="add_period" name="period" readonly="readonly">
+                    <input class="col-md-6 offset-md-2 align-self-center"  type="text" id="add_period" readonly="readonly">
+                </div>
+                <div id="vendor-info" style="display: none;">
+                    <div class="row">
+                        <p class="col-md-4 input-head">Client ID</p>    
+                        <input class="col-md-6 offset-md-2 align-self-center" type="number" name="client_id" id="client-id">
+                    </div>
                 </div>
                 <div id="client-info">
+                    <div class="row">
+                        <p class="col-md-4 input-head">Vendor ID</p>    
+                        <input class="col-md-6 offset-md-2 align-self-center" type="number" name="vendor_id" id="vendor-id">
+                    </div>
                     <div class="row">
                         <p class="col-md-4 input-head">Work Order No.</p>    
                         <input class="col-md-6 offset-md-2 align-self-center" type="number" name="work-no">
@@ -96,21 +106,35 @@
                 <h4>Bank Guarantee</h4>
                 <div class="row">
                     <p class="col-md-4 input-head">BG No.</p>    
-                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name="bg-no">
+                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name="bg-no" placeholder="BG NO.">
+                </div>
+                <div class="row">
+                    <p class="col-md-4 input-head">Confirmation from Bank</p>    
+                    <select class="col-md-6 offset-md-2 align-self-center" name="confirm" id="confirmation">
+                        <option value="No" selected="selected">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+                <div id="if_confirm" style="display: none;" class="row">
+                    <p class="col-md-4 input-head">Date</p>    
+                    <input class="col-md-6 offset-md-2 align-self-center" type="date" name="confirm_date" placeholder="Confirmation Date">
                 </div>
                 <div class="row">
                     <p class="col-md-4 input-head">BG Amount</p>    
-                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name="bg-amount">
+                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name="bg-amount"  placeholder="BG Amount">
                 </div>
                 <div class="row">
                     <p class="col-md-4 input-head">BG Date</p>    
-                    <input class="col-md-6 offset-md-2 align-self-center" type="date" name="bg-date">
+                    <input class="col-md-6 offset-md-2 align-self-center" type="date" name="bg-date" placeholder="BG Date">
                 </div>
                 <div class="row">
                     <p class="col-md-4 input-head">BG Expiry Date</p>    
-                    <input class="col-md-6 offset-md-2 align-self-center" type="date" name="bg-expiry">
+                    <input class="col-md-6 offset-md-2 align-self-center" type="date" name="bg-expiry" placeholder="BG Expiry Date">
                 </div>
-                
+                <div class="row">
+                    <p class="col-md-4 input-head">Remarks</p>    
+                    <input class="col-md-6 offset-md-2 align-self-center" style="height: 72px" type="text" name="remarks" placeholder="Remarks">
+                </div>
                 <div class="row">
                     <input class="col-md-8 offset-md-2" style="margin-top: 16px;" type="submit">
                 </div>
@@ -128,47 +152,96 @@
                 <form class="col-10 offset-1" action = <?php if(isset($_SESSION["info_found"])){ echo "php/update-vendor.php"; }else{ echo "php/search_id.php";} ?> method ="POST">
                 <?php if(!isset($_SESSION["info_found"])){?>
                     <div class="row">
+                        <p class="col-md-4 input-head">Add Details for: </p>    
+                        <select class="col-md-6 offset-md-2 align-self-center" id="edit-select" name="option">
+                            <option value="client" selected="selected">Client</option>
+                            <option value="vendor">Vendor</option>
+                        </select> 
+                    </div>
+                    <div class="row">
                         <p class="col-md-4 input-head">Unique Id</p>    
                         <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" name="id" id="update_id">
                     </div>
-                    <button type = "submit" id="search_id" class="col-10 offset-1 align-self-center add-button"onclick="search_id()">Search</button>
+                    <button type = "submit" id="search_id" class="col-10 offset-1 align-self-center add-button">Search</button>
                     <?php }?>
                     <?php 
                     if(isset($_SESSION["info_found"])){
                         
                         if($_SESSION["info_found"]=== "Not Found"){ ?>
-                            <button id="search_id" class="col-10 offset-1 align-self-center add-button"onclick="search_id()">Search</button>
+                            <div class="row">
+                                <p class="col-md-4 input-head">Add Details for: </p>    
+                                <select class="col-md-6 offset-md-2 align-self-center" id="edit-select" name="option">
+                                    <option value="client" selected="selected">Client</option>
+                                    <option value="vendor">Vendor</option>
+                                </select> 
+                            </div>
+                            <div class="row">
+                                <p class="col-md-4 input-head">Unique Id</p>    
+                                <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" name="id" id="update_id">
+                            </div>
+                            <button id="search_id" class="col-10 offset-1 align-self-center add-button">Search</button>
                             <p style="color: red; text-align: center">Not Found</p>
 
                         <?php }else{ ?>
                         <div class="row">
                             <p class="col-md-4 input-head">Unique Id</p>    
-                            <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" name="id" id="update_id" placeholder= <?php echo $_SESSION['id'] ?> value= <?php echo $_SESSION['id'] ?> readonly="readonly">
+                            <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" name="id" id="update_id" placeholder= <?php echo $_SESSION['result']['id'] ?> value= <?php echo $_SESSION['result']['id'] ?> readonly="readonly">
                         </div>
                         <div class="row">
                             <p class="col-md-4 input-head">Added By</p>    
-                            <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" id="update_id" placeholder= <?php echo $_SESSION['added_by'] ?> value= <?php echo $_SESSION['added_by'] ?> disabled>
+                            <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" id="update_id" placeholder= <?php echo $_SESSION['result']['added_by'] ?> value= <?php echo $_SESSION['result']['added_by'] ?> disabled>
                         </div>
                         <div class="row">
                             <p class="col-md-4 input-head">Name</p>    
-                            <input class="col-md-6 offset-md-2 align-self-center" type="text" name="name" placeholder=<?php echo $_SESSION["name"] ?> value=<?php echo $_SESSION["name"] ?> >
+                            <input class="col-md-6 offset-md-2 align-self-center" type="text" name="name" placeholder=<?php echo $_SESSION['result']["name"] ?> value=<?php echo $_SESSION['result']["name"] ?> >
+                        </div>
+                        <div class="row">
+                            <p class="col-md-4 input-head">Project Name</p>    
+                            <input class="col-md-6 offset-md-2 align-self-center" type="text" name="project_name" placeholder=<?php echo $_SESSION['result']["project_name"] ?> value=<?php echo $_SESSION['result']["project_name"] ?> >
                         </div>
                         <div class="row">
                             <p class="col-md-4 input-head">Contract Start Date</p>    
-                            <input class="col-md-6 offset-md-2 align-self-center" type="date" id="update_start_date" name="start_date" placeholder=<?php echo $_SESSION["start_date"] ?> value=<?php echo $_SESSION["start_date"] ?>>
+                            <input class="col-md-6 offset-md-2 align-self-center" type="date" id="update_start_date" name="start_date" placeholder=<?php echo $_SESSION['result']["start_date"] ?> value=<?php echo $_SESSION['result']["start_date"] ?>>
                         </div>
                         <div class="row">
                             <p class="col-md-4 input-head">Contract End Date</p>    
-                            <input class="col-md-6 offset-md-2 align-self-center" type="date" id="update_end_date" name="end_date" placeholder=<?php echo $_SESSION["end_date"]; ?> value=<?php echo $_SESSION["end_date"]; ?>>
+                            <input class="col-md-6 offset-md-2 align-self-center" type="date" id="update_end_date" name="end_date" placeholder=<?php echo $_SESSION['result']["end_date"]; ?> value=<?php echo $_SESSION['result']["end_date"]; ?>>
                         </div>
-                        <!-- <div class="row">
-                            <p class="col-md-4 input-head">Period</p>    
-                            <input class="col-md-6 offset-md-2 align-self-center" style="background-color: rgb(200,200,200);" id="update_period" type="text" name="period" readonly="readonly">
-                        </div> -->
+                        <?php 
+                            if($_SESSION["option"]==="client"){ ?>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Work Order No.</p>    
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="number"  name="work-no" placeholder=<?php echo $_SESSION['result']["work_no"] ?> value=<?php echo $_SESSION['result']["work_no"] ?>>
+                                </div>
+                                 <div class="row">
+                                    <p class="col-md-4 input-head">Date</p>    
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="date"  name="client-date" placeholder=<?php echo $_SESSION['result']["client_date"]; ?> value=<?php echo $_SESSION['result']["client_date"]; ?>>
+                                </div>
+                            <?php } ?>
                         <div class="row">
-                            <input class="col-md-8 offset-md-2" style="margin-top: 16px;" type="submit">
+                            <p class="col-md-4 input-head">BG NO.</p>    
+                            <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" name="bg-no" placeholder= <?php echo $_SESSION['result']['bg_no'] ?> value= <?php echo $_SESSION['result']['bg_no'] ?>>
                         </div>
-                    <?php unset($_SESSION["info_found"]); }} ?>
+                        <div class="row">
+                            <p class="col-md-4 input-head">BG Amount</p>    
+                            <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" name="bg-amount" placeholder= <?php echo $_SESSION['result']['bg_amount'] ?> value= <?php echo $_SESSION['result']['bg_amount'] ?> >
+                        </div>
+                        <div class="row">
+                            <p class="col-md-4 input-head">BG Date</p>    
+                            <input class="col-md-6 offset-md-2 col-10 align-self-center" type="date" name="bg-date" placeholder= <?php echo $_SESSION['result']['bg_date'] ?> value= <?php echo $_SESSION['result']['bg_date'] ?> >
+                        </div>
+                        <div class="row">
+                            <p class="col-md-4 input-head">BG Expiry Date</p>    
+                            <input class="col-md-6 offset-md-2 col-10 align-self-center" type="date" name="bg-expiry" placeholder= <?php echo $_SESSION['result']['bg_expiry'] ?> value= <?php echo $_SESSION['result']['bg_expiry'] ?> >
+                        </div>
+                        <div class="row">
+                            <p class="col-md-4 input-head">BG Amount</p>    
+                            <input style="height: auto;" class="col-md-6 offset-md-2 col-10 align-self-center" type="text" name="Remarks" placeholder= <?php echo $_SESSION['result']['remarks'] ?> value= <?php echo $_SESSION['result']['remarks'] ?> >
+                        </div>
+                        <div class="row">
+                            <input class="col-md-8 offset-md-2" style="margin-top: 16px;" placeholder="Update" type="submit">
+                        </div>
+                        <?php }unset($_SESSION["info_found"]); } ?>
                         </div>
                 </div>
             </div>
@@ -179,15 +252,15 @@
     <hr>
        <?php
         $con = mysqli_connect("localhost", "root","","cms");
-       $query1 = "SELECT * FROM vendors, employees, bg_info
-         WHERE vendors.added_by = employees.username AND vendors.id = bg_info.id";
+        $query1 = "SELECT * FROM vendors, employees, bg_info
+            WHERE vendors.added_by = employees.username AND vendors.id = bg_info.id";
 
-       $result1 = mysqli_query($con,$query1);
+        $result1 = mysqli_query($con,$query1);
 
-       $query2 = "SELECT * FROM clients, employees, bg_info 
-         WHERE clients.added_by = employees.username AND clients.id = bg_info.id";
+        $query2 = "SELECT * FROM clients, employees, bg_info 
+            WHERE clients.added_by = employees.username AND clients.id = bg_info.id";
 
-       $result2 = mysqli_query($con,$query2);
+        $result2 = mysqli_query($con,$query2);
 
        if($result1 === false){
            echo mysqli_error($con);
@@ -203,12 +276,16 @@
                     <th scope="col">Added By</th>
                     <th scope="col">Vendor Id</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Project Name</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">End Date</th>
                     <th scope="col">BG No.</th>
                     <th scope="col">BG Amount</th>
                     <th scope="col">BG Date</th>
                     <th scope="col">BG Expiry Date</th>
+                    <th scope="col">Confirmation</th>
+                    <th scope="col">Confirmation Date</th>
+                    <th scope="col">Remarks</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -217,6 +294,7 @@
                         <td><?php echo $rows['emp_name']; ?> </td>
                         <td><?php echo $rows['id'] ?></td>
                         <td><?php echo $rows['name'] ?></td>
+                        <td><?php echo $rows['project_name'] ?></td>
                         <td><?php echo $rows['start_date'] ?></td>
                         <td <?php 
                                     $last_date = $rows['end_date']." 00:00:00";
@@ -236,6 +314,9 @@
                         <td><?php echo $rows['bg_amount']; ?> </td>
                         <td><?php echo $rows['bg_date']; ?> </td>
                         <td><?php echo $rows['bg_expiry']; ?> </td>
+                        <td><?php echo $rows['confirmation']; ?> </td>
+                        <td><?php echo $rows['confirm_date']; ?> </td>
+                        <td><?php echo $rows['remarks']; ?> </td>
                     </tr>
                 <?php  } ?>
                 </tbody>
@@ -247,12 +328,20 @@
                 <thead>
                   <tr>
                     <th scope="col">Added By</th>
-                    <th scope="col">Vendor Id</th>
+                    <th scope="col">Client Id</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Project Name</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">End Date</th>
                     <th scope="col">Work No.</th>
                     <th scope="col">Date</th>
+                    <th scope="col">BG No.</th>
+                    <th scope="col">BG Amount</th>
+                    <th scope="col">BG Date</th>
+                    <th scope="col">BG Expiry Date</th>
+                    <th scope="col">Confirmation</th>
+                    <th scope="col">Confirmation Date</th>  
+                    <th scope="col">Remarks</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -261,6 +350,7 @@
                         <td><?php echo $rows['emp_name']; ?> </td>
                         <td><?php echo $rows['id'] ?></td>
                         <td><?php echo $rows['name'] ?></td>
+                        <td><?php echo $rows['project_name'] ?></td>
                         <td><?php echo $rows['start_date'] ?></td>
                         <td <?php 
                                     $last_date = $rows['end_date']." 00:00:00";
@@ -278,6 +368,13 @@
                                     <?php } ?>><?php echo $rows['end_date'] ?></td>
                         <td><?php echo $rows['work_no']; ?> </td>
                         <td><?php echo $rows['client_date']; ?> </td>
+                        <td><?php echo $rows['bg_no']; ?> </td>
+                        <td><?php echo $rows['bg_amount']; ?> </td>
+                        <td><?php echo $rows['bg_date']; ?> </td>
+                        <td><?php echo $rows['bg_expiry']; ?> </td>
+                        <td><?php echo $rows['confirmation']; ?> </td>
+                        <td><?php echo $rows['confirm_date']; ?> </td>
+                        <td><?php echo $rows['remarks']; ?> </td>
                     </tr>
                 <?php  } ?>
                 </tbody>

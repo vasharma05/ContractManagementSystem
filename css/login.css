@@ -5,7 +5,9 @@ a{
     text-decoration: none;
     text-align: right;
 }
-
+p{
+    font-size: 0.5vw;
+}
 .box{
     height: auto;
     padding: 2% 0;
@@ -41,7 +43,7 @@ hr{
 input{
     border: 1px solid black;
     border-radius: 8px;
-    height: 24px;
+    height: 30px;
     text-align: center;
 }
 select{

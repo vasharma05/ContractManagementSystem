@@ -4,18 +4,17 @@ session_start();
 $con = mysqli_connect('localhost', 'root', '','cms');
 
 $id = $_POST["id"];
+$option = mysqli_real_escape_string($con,$_POST["option"]);
 
-$query = "Select * from vendors WHERE id=".$id;
 
+$query = "Select * from ".$option."s, bg_info WHERE ".$option."s.id = bg_info.id";
+echo $query;
 $result = mysqli_query($con,$query);
 if($row = mysqli_fetch_assoc($result)){
-    $_SESSION["id"] = $id;
-    $_SESSION["name"] = $row["name"];
-    $_SESSION["start_date"] = $row["start_date"];
-    $_SESSION["end_date"] = $row["end_date"];
-    $_SESSION["added_by"] = $row["added_by"];
-    $_SESSION["info_found"] = "Found";
+    $_SESSION['result'] = $row;
     $_SESSION["status"] = "Click the Edit/Update Button";
+    $_SESSION["option"] = $option;
+    $_SESSION["info_found"] = "Found";
     header("Location: ../vendor.php");
 }else{
     $_SESSION["info_found"] = "Not Found";

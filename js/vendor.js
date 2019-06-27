@@ -17,18 +17,32 @@ function clicked_button(i) {
     $("#add-select").change(function(){
         console.log($( "#add-select option:selected" ).val())
         if($( "#add-select option:selected" ).val() === "client"){
+            $('#vendor-info input').attr("disabled",true);
+            $('#vendor-info').slideUp(1000);
             $('#client-info input').attr("disabled",false);
             $('#client-info').slideDown(1000);
             $('form').attr("action","php/add-client.php")
             console.log("check");
         }
         if($( "#add-select option:selected" ).val() === "vendor"){
+            $('#vendor-info input').attr("disabled",false);
+            $('#vendor-info').slideDown(1000);
             $('#client-info input').attr("disabled",true);
             $('#client-info').slideUp(1000);
             $('form').attr("action","php/add-vendor.php")
             console.log("check2");
         }
     });
+    $("#confirmation").change(function(){
+        console.log($( "#confirmation option:selected" ).val())
+        if($( "#confirmation option:selected" ).val() === "Yes"){
+            $('#if_confirm').slideDown(500);
+        }
+        if($( "#confirmation option:selected" ).val() === "No"){
+            $('#if_confirm').slideUp(500);
+        }
+    });
+
 
 }
 
