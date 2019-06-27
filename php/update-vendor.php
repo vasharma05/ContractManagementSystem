@@ -7,7 +7,6 @@
     $name = mysqli_real_escape_string($con,$_POST["name"]);
     $start_date = mysqli_real_escape_string($con,$_POST["start_date"]);
     $end_date = mysqli_real_escape_string($con,$_POST["end_date"]);
-    $period = mysqli_real_escape_string($con,$_POST["period"]);
 
     $check_query = "SELECT name FROM  vendors WHERE id=$id";
 
@@ -18,7 +17,7 @@
         echo mysqli_error($con);
     }else{
         if($row[0]){
-            $query = "UPDATE vendors SET name = '$name', start_date = '$start_date', end_date ='$end_date', period = '$period' WHERE id=$id ";
+            $query = "UPDATE vendors SET name = '$name', start_date = '$start_date', end_date ='$end_date' WHERE id=$id ";
 
             $result = mysqli_query($con, $query);
 

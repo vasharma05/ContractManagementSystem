@@ -5,17 +5,42 @@ var report =new Boolean(true);
 
 function clicked_button(i) {
     if(i==0){
-        $('#add_form').slideDown(1000);
-        $('#update_form').slideUp(1000);
+        $('#add_form').slideDown(500);
+        $('#update_form').slideUp(500);
     }else if(i==1){
-        $('#add_form').slideUp(1000);
-        $('#update_form').slideDown(1000);
+        $('#add_form').slideUp(500);
+        $('#update_form').slideDown(500);
     }else{
-        $('#add_form').slideUp(1000);
-        $('#update_form').slideUp(1000);
+        $('#add_form').slideUp(500);
+        $('#update_form').slideUp(500);
     }
+    $("#add-select").change(function(){
+        console.log($( "#add-select option:selected" ).val())
+        if($( "#add-select option:selected" ).val() === "client"){
+            $('#vendor-info input').attr("disabled",true);
+            $('#vendor-info').slideUp(1000);
+            $('#client-info input').attr("disabled",false);
+            $('#client-info').slideDown(1000);
+            $('form').attr("action","php/add-client.php")
+            console.log("check");
+        }
+        if($( "#add-select option:selected" ).val() === "vendor"){
+            $('#vendor-info input').attr("disabled",false);
+            $('#vendor-info').slideDown(1000);
+            $('#client-info input').attr("disabled",true);
+            $('#client-info').slideUp(1000);
+            $('form').attr("action","php/add-vendor.php")
+            console.log("check2");
+        }
+    });
+
 }
 
+
+
+$('#id')[0].value = Math.floor(Math.random()*90000) + 10000;
+$('#id')[0].placeholder = $('#id')[0].value;
+console.log($('#id')[0].value);
 
 
 
@@ -76,14 +101,10 @@ update_endInput.addEventListener("change", (e)=>{
     }   
 
 });
+var id;
 function search_id() {
-    var id;
-    id = $('#search_id').val();
-    window.location.href = "localhost/CMS/search_id.php?";
+    id = parseInt($('#update_id').val());
+    window.location.href = "php/search_id.php?id="+id;
+
 }
-
-
-document.getElementById('id').value = Math.floor(Math.random()*90000) + 10000;
-document.getElementById('id').placeholder = document.getElementById('id').value;
-console.log(document.getElementById('id').value);
 

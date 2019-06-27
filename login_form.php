@@ -23,9 +23,12 @@
     ?>
 </head>
 <body>
-    <div class="container">
-        <img src="img/tcil.png" width="150px" height="150px">
-    </div>
+<div class="container">
+                <div class = "row">
+                    <img src="img/tcil.png" class="col-md-2" width="150px" height="150px">
+                    <h1 class="col-md-6 offset-1 col-10" style="text-align: center;">Contract Management System</h1>
+                </div>
+        </div>
     <section class="container-fluid">
         <div class="row">
             <div class="col-md-4 offset-md-4 align-self-center container box">
