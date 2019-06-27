@@ -10,12 +10,19 @@ $end_date = mysqli_real_escape_string($con,$_POST["end_date"]);
 $employee_id = $_SESSION["employee_id"];
 $work_no = $_POST["work-no"];
 $client_date = mysqli_real_escape_string($con,$_POST["client-date"]);
+$bg_no = $_POST["bg-no"];
+$bg_amount = $_POST["bg-amount"];
+$bg_date = mysqli_real_escape_string($con,$_POST["bg-date"]);
+$bg_expiry_date = mysqli_real_escape_string($con,$_POST["bg-expiry"]);
 
-$query = "INSERT INTO clients VALUES($employee_id, $id, '$name', '$start_date', '$end_date', $work_no, '$client_date')";
 
-$result = mysqli_query($con, $query);
+$info_query = "INSERT INTO clients VALUES($employee_id, $id, '$name', '$start_date', '$end_date', $work_no, '$client_date')";
+$info_result = mysqli_query($con, $info_query);
 
-if($result === false){
+$bg_query = "INSERT INTO bg_info VALUES($id, $bg_no, $bg_amount, '$bg_date', '$bg_expiry_date')";
+$bg_result = mysqli_query($con, $bg_query);
+
+if($info_result === false || $bg_result === false){
     echo "Failure";
     echo mysqli_error($con);
 }else{

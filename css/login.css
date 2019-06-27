@@ -41,7 +41,7 @@ hr{
 input{
     border: 1px solid black;
     border-radius: 8px;
-    height: 36px;
+    height: 24px;
     text-align: center;
 }
 select{

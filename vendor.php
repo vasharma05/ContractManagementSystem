@@ -60,12 +60,16 @@
             </div>
             <form class="col-10 offset-1" action = "php/add-client.php" method="POST">
                 <div class="row">
-                    <p class="col-md-4 input-head">Unique Id</p>    
-                    <input class="col-md-6 offset-md-2 align-self-center" style="background-color: rgb(200,200,200);" type="number" name="id" id="id" readonly="readonly" >
+                    <p class="col-md-4 input-head">Unique ID</p>    
+                    <input class="col-md-6 offset-md-2 align-self-center" style="background-color: rgb(200,200,200);" type="number" name="id" id="id"  >
                 </div>
                 <div class="row">
                     <p class="col-md-4 input-head">Name</p>    
                     <input class="col-md-6 offset-md-2 align-self-center" type="text" name="name" placeholder="Name">
+                </div>
+                <div class="row">
+                    <p class="col-md-4 input-head">Project Name</p>    
+                    <input class="col-md-6 offset-md-2 align-self-center" type="text" name="project_name" placeholder="Project Name">
                 </div>
                 <div class="row">
                     <p class="col-md-4 input-head">Contract Start Date</p>    
@@ -89,24 +93,22 @@
                         <input class="col-md-6 offset-md-2 align-self-center" type="date" name="client-date">
                     </div>
                 </div>
-                <div id="vendor-info" style="display: none;">
-                    <h4>Bank Guarantee</h4>
-                    <div class="row">
-                        <p class="col-md-4 input-head">BG No.</p>    
-                        <input class="col-md-6 offset-md-2 align-self-center" disabled type="number" name="bg-no">
-                    </div>
-                    <div class="row">
-                        <p class="col-md-4 input-head">BG Amount</p>    
-                        <input class="col-md-6 offset-md-2 align-self-center" disabled type="number" name="bg-amount">
-                    </div>
-                    <div class="row">
-                        <p class="col-md-4 input-head">BG Date</p>    
-                        <input class="col-md-6 offset-md-2 align-self-center" disabled type="date" name="bg-date">
-                    </div>
-                    <div class="row">
-                        <p class="col-md-4 input-head">BG Expiry Date</p>    
-                        <input class="col-md-6 offset-md-2 align-self-center" disabled type="date" name="bg-expiry">
-                    </div>
+                <h4>Bank Guarantee</h4>
+                <div class="row">
+                    <p class="col-md-4 input-head">BG No.</p>    
+                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name="bg-no">
+                </div>
+                <div class="row">
+                    <p class="col-md-4 input-head">BG Amount</p>    
+                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name="bg-amount">
+                </div>
+                <div class="row">
+                    <p class="col-md-4 input-head">BG Date</p>    
+                    <input class="col-md-6 offset-md-2 align-self-center" type="date" name="bg-date">
+                </div>
+                <div class="row">
+                    <p class="col-md-4 input-head">BG Expiry Date</p>    
+                    <input class="col-md-6 offset-md-2 align-self-center" type="date" name="bg-expiry">
                 </div>
                 
                 <div class="row">
@@ -177,16 +179,17 @@
     <hr>
        <?php
         $con = mysqli_connect("localhost", "root","","cms");
-       $query1 = "SELECT * FROM vendors JOIN employees
-         ON vendors.added_by = employees.username";
+       $query1 = "SELECT * FROM vendors, employees, bg_info
+         WHERE vendors.added_by = employees.username AND vendors.id = bg_info.id";
 
        $result1 = mysqli_query($con,$query1);
 
-       $query2 = "SELECT * FROM clients JOIN employees
-         ON clients.added_by = employees.username";
+       $query2 = "SELECT * FROM clients, employees, bg_info 
+         WHERE clients.added_by = employees.username AND clients.id = bg_info.id";
 
        $result2 = mysqli_query($con,$query2);
-       if($result2 === false){
+
+       if($result1 === false){
            echo mysqli_error($con);
        }
        $current_date = date("Y-m-d");
