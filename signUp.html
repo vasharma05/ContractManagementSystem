@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link href="Bootstrap/css/bootstrap-grid.min.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="css/login.css" type="text/css" rel="stylesheet">
+    <script>
+        
+    </script>
+</head>
+<body>
+        <div class="container">
+                <div class = "row">
+                    <img src="img/tcil.png" class="col-md-2" width="150px" height="150px">
+                    <h1 class="col-md-6 offset-1 col-10 align-self-center" style="text-align: center;">Contract Management System</h1>
+                </div>
+        </div>
+    <section class="container-fluid" style="margin-top: 48px">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 box">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <h2 class="signup-heading">
+                                Register as an Employee
+                            </h2>
+                            <hr>
+                            <form name="Form" action="php/register.php" method="POST"  >
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Employee No<span style="color: red;">*</span></p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name="username" placeholder="Username" required>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Name<span style="color: red;">*</span></p>    
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="text" name="name" placeholder="Name" required>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Gender<span style="color: red;">*</span></p>
+                                    <div class="col-md-6 offset-md-2 align-self-center">
+                                        <input type="radio" name="gender" value="male" checked> Male 
+                                        <input type="radio" name="gender" value="female"> Female
+                                        <input type="radio" name="gender" value="other"> Other
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Designation<span style="color: red;">*</span></p>    
+                                    <select class="col-md-6 offset-md-2 align-self-center" name="designation" required>
+                                            <option value="AM">AM</option>
+                                            <option value="Engineer">Engineer</option>
+                                            <option value="DM">DM</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Email ID<span style="color: red;">*</span></p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="email" name="email" placeholder="Email" required>
+                                </div>   
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Contact No<span style="color: red;">*</span></p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" id="contact-check" type="number" name="contact" placeholder="Contact No." required>
+                                    <p id="contact-alert" style="color: red; display: none;">Enter a proper 10 digit number<span style="color: red;">*</span></p>
+                                </div>
+                                
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Password<span style="color: red;">*</span></p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" id="pass" type="password" name="password" placeholder="Password" pattern=".{6,}" required>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-4 input-head">Confirm Password<span style="color: red;">*</span></p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" id="cnfr_pass" type="password" name="confirm_password" placeholder="Confirm Password" pattern=".{6,}" required>
+                                    <p id="pass-alert" style="color: red; display: none">Passwords don't match!</p>
+                                </div>
+                                <div class="row">
+                                <input id = "btnSubmit" class="col-md-8 offset-md-2" style="margin-top: 16px;" type="submit" onclick="validate()">
+                                </div>
+                            </form>
+                            <hr>
+
+                            <a href="login_form.php" class="forgot-pass">Already a Registered User?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script>
+        var check1 = 0, check2=0;
+        $('#contact-check').focusout(()=>{
+            console.log($('#contact-check').val());
+            if($('#contact-check').val().length !=10){
+                $('#contact-alert').css("display","block");
+                check1 = 0;
+            }else{
+                $('#contact-alert').css("display","none");
+                $('btnSubmit').css("background-color","green");
+                check1 = 1;
+            }
+            if(check1 && check2){
+                $("#btnSubmit").attr("disabled", true);
+            }else{
+                $("#btnSubmit").attr("disabled", false);
+            }
+        });
+        $('#pass').focusout(()=>{
+            var val_pass = $('#pass').val();
+            if(val_pass.length < 6){
+                $('#pass-alert').text("Password should be greater than 6 letters");
+                $('#pass-alert').css('display','block');
+                check2 = 0;
+            }else{
+                $('#pass-alert').text("Passwords don't match!");
+                $('#pass-alert').css('display','none');
+                check2 = 1;
+            }
+            if(check1==1 && check2 ==1){
+                $("#btnSubmit").attr("disabled", true);
+            }else{
+                $("#btnSubmit").attr("disabled", false);
+            }
+        })
+        $('#cnfr_pass').focusout(()=>{
+            var val_pass = $('#pass').val();
+            var val_cnfr_pass = $('#cnfr_pass').val();
+            console.log(val_pass);
+            console.log(val_cnfr_pass);
+            if(val_pass != val_cnfr_pass){
+                $('#pass-alert').css('display','block');
+                check2 = 0;
+            }else{
+                $('#pass-alert').css('display','none');
+                $('btnSubmit').css("background-color","green");
+                check2 = 1;
+            }
+            if(check1==1 && check2 ==1){
+                $("#btnSubmit").attr("disabled", true);
+            }else{
+                $("#btnSubmit").attr("disabled", false);
+            }
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+}
+button{
+    height: 36px;
+    border: 1px solid black;
+    border-radius: 16px;
+    box-shadow: 0 0 4px black;
+    margin-top: 24px;
+    color: white;
+}
+button:active{
+    box-shadow: 0 0 4px black;
+}
+.add-button{
+    background-color: green;
+}
+.update-button{
+    background-color: blue;
+}
+.report-button{
+    background-color: red;
+}
+#add_form{
+    margin-top: 48px;
+    height: auto;
+    display: none;
+}   
+#update_form{
+    margin-top: 48px;
+    display: none;
+}
+#report{
+    margin-top: 48px;
+}
+hr{
+    width: 100%;
+}
+.box{
+    padding: 2% 0;
+}
