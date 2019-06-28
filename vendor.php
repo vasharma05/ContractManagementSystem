@@ -345,6 +345,7 @@
                 </tbody>
               </table>
               </div>
+    <a class="download" href="php/vendors_file.php">Download</a>
     <h4>Clients</h4>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -405,6 +406,7 @@
                 </tbody>
               </table>
               </div>
+              <a class="download" href="php/clients_file.php">Download</a>
 
 </section>
 
