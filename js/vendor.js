@@ -43,8 +43,21 @@ function clicked_button(i) {
         }
     });
 
+    $("#update_confirmation").change(function(){
+        console.log($( "#update_confirmation option:selected" ).val())
+        if($( "#update_confirmation option:selected" ).val() === "Yes"){
+            $('#update_if_confirm').slideDown(500);
+            $('#update_if_confirm input').attr("disabled",false);
+        }
+        if($( "#update_confirmation option:selected" ).val() === "No"){
+            $('#update_if_confirm').slideUp(500);
+            $('#update_if_confirm input').attr("disabled",true);
+        }
+    });
+
 
 }
+
 
 
 
@@ -52,7 +65,9 @@ $('#id')[0].value = Math.floor(Math.random()*90000) + 10000;
 $('#id')[0].placeholder = $('#id')[0].value;
 console.log($('#id')[0].value);
 
-
+if($('#update_confirmation').val()== "Yes"){
+    $('#update_if_confirm').slideDown(100);
+}
 
 var add_start;
 var add_end;

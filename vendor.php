@@ -17,7 +17,7 @@
             session_start();
             if(isset($_SESSION["status"])){ ?>
                 <script>
-                    promt("<?php echo $_SESSION["status"]; ?>");
+                    prompt("<?php echo $_SESSION["status"]; ?>");
                 </script>
             <?php 
                 unset($_SESSION["status"]);
@@ -217,10 +217,31 @@
                                     <p class="col-md-4 input-head">Date</p>    
                                     <input class="col-md-6 offset-md-2 align-self-center" type="date"  name="client-date" placeholder=<?php echo $_SESSION['result']["client_date"]; ?> value=<?php echo $_SESSION['result']["client_date"]; ?>>
                                 </div>
+                                <div class='row'>
+                                    <p class="col-md-4 input-head">Vendor ID</p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name='vendor_id' value=<?php echo $_SESSION['result']['vendor'] ?> placeholder=<?php echo $_SESSION['result']['vendor']  ?> >
+                                </div>
+                            <?php }else{ ?>
+                                <div class='row'>
+                                    <p class="col-md-4 input-head">client ID</p>
+                                    <input class="col-md-6 offset-md-2 align-self-center" type="number" name='client_id' value=<?php echo $_SESSION['result']['client'] ?> placeholder=<?php echo $_SESSION['result']['client']  ?> >
+                                </div>
                             <?php } ?>
                         <div class="row">
                             <p class="col-md-4 input-head">BG NO.</p>    
                             <input class="col-md-6 offset-md-2 col-10 align-self-center" type="number" name="bg-no" placeholder= <?php echo $_SESSION['result']['bg_no'] ?> value= <?php echo $_SESSION['result']['bg_no'] ?>>
+                        </div>
+                        
+                        <div class="row">
+                            <p class="col-md-4 input-head">Confirmation from Bank</p>    
+                            <select class="col-md-6 offset-md-2 align-self-center" name="confirm" id="update_confirmation" value=<?php echo $_SESSION["result"]['confirmation']?> >
+                                <option value="No" <?php if($_SESSION["result"]['confirmation'] === "No"){ ?> selected="selected" <?php } ?> >No</option>
+                                <option value="Yes" <?php if($_SESSION["result"]['confirmation'] === "Yes"){ ?> selected="selected" <?php } ?>>Yes</option>
+                            </select>
+                        </div>
+                        <div id="update_if_confirm" style="display: none;" class="row">
+                            <p class="col-md-4 input-head">Date</p>    
+                            <input class="col-md-6 offset-md-2 align-self-center" type="date" name="confirm_date" placeholder=<?php echo $_SESSION['result']['confirm_date'] ?> value = <?php echo $_SESSION['result']['confirm_date'] ?>>
                         </div>
                         <div class="row">
                             <p class="col-md-4 input-head">BG Amount</p>    
@@ -234,9 +255,9 @@
                             <p class="col-md-4 input-head">BG Expiry Date</p>    
                             <input class="col-md-6 offset-md-2 col-10 align-self-center" type="date" name="bg-expiry" placeholder= <?php echo $_SESSION['result']['bg_expiry'] ?> value= <?php echo $_SESSION['result']['bg_expiry'] ?> >
                         </div>
-                        <div class="row">
-                            <p class="col-md-4 input-head">BG Amount</p>    
-                            <input style="height: auto;" class="col-md-6 offset-md-2 col-10 align-self-center" type="text" name="Remarks" placeholder= <?php echo $_SESSION['result']['remarks'] ?> value= <?php echo $_SESSION['result']['remarks'] ?> >
+                             <div class="row">
+                            <p class="col-md-4 input-head">Remarks</p>    
+                            <input class="col-md-6 offset-md-2 align-self-center" style="height: 72px" type="text" name="remarks" value="<?php echo $_SESSION['result']['remarks'] ?>" placeholder="<?php echo $_SESSION['result']['remarks'] ?>">
                         </div>
                         <div class="row">
                             <input class="col-md-8 offset-md-2" style="margin-top: 16px;" placeholder="Update" type="submit">
@@ -279,6 +300,7 @@
                     <th scope="col">Project Name</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">End Date</th>
+                    <th scope="col">Client ID</th>
                     <th scope="col">BG No.</th>
                     <th scope="col">BG Amount</th>
                     <th scope="col">BG Date</th>
@@ -310,6 +332,7 @@
                                     }if($diff < 0){ ?>
                                         style="background-color: grey; color: white"
                                     <?php } ?>><?php echo $rows['end_date'] ?></td>
+                        <td><?php echo $rows['client']; ?> </td>
                         <td><?php echo $rows['bg_no']; ?> </td>
                         <td><?php echo $rows['bg_amount']; ?> </td>
                         <td><?php echo $rows['bg_date']; ?> </td>
@@ -335,6 +358,7 @@
                     <th scope="col">End Date</th>
                     <th scope="col">Work No.</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Vendor</th>
                     <th scope="col">BG No.</th>
                     <th scope="col">BG Amount</th>
                     <th scope="col">BG Date</th>
@@ -368,6 +392,7 @@
                                     <?php } ?>><?php echo $rows['end_date'] ?></td>
                         <td><?php echo $rows['work_no']; ?> </td>
                         <td><?php echo $rows['client_date']; ?> </td>
+                        <td><?php echo $rows['vendor']; ?> </td>
                         <td><?php echo $rows['bg_no']; ?> </td>
                         <td><?php echo $rows['bg_amount']; ?> </td>
                         <td><?php echo $rows['bg_date']; ?> </td>
