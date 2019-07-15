@@ -32,7 +32,7 @@ if($confirmation == "Yes"){
 }
 $bg_result = mysqli_query($con, $bg_query);
 
-if($info_result === false || $bg_query=== false){
+if($info_result === false && $bg_result=== false){
     echo "Failure";
     echo mysqli_error($con);
 }else{
