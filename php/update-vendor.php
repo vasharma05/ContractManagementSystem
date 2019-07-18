@@ -52,7 +52,7 @@
     }else{
         echo "Updated";
         $_SESSION["status"] = "Successfully Added!";
-        // header("Location: ../vendor.php");
+        header("Location: ../vendor.php");
     }
 
 
