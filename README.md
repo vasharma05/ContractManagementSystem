@@ -6,7 +6,7 @@ Project Screenshots and their Desription
 Register Page
 The Registration page inputs the details of the new employee on the system and enters the details into the Database.
 
-![Register Page]](https://github.com/vasharma05/ContractManagementSystem/blob/master/Screenshots/Register.PNG)
+![Register Page](https://github.com/vasharma05/ContractManagementSystem/blob/master/Screenshots/Register.PNG)
 
 Login Page
 The Login Page/Home Page consists of 2 fields Employee ID, Password. On Failure, it will alert ‘No User Found’, else on success it will direct to the admin page, with Enabling the session_start() function and the Employee Name and Employee ID who logged in.
