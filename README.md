@@ -5,4 +5,4 @@ Project Screenshots and their Desription
 
 Login Page
 
-![Login Page](https://raw.githubusercontent.com/vasharma05/ContractManagementSystem/Screenshots/Login.PNG)
+![Login Page](https://github.com/vasharma05/ContractManagementSystem/blob/master/Screenshots/Login.PNG)
