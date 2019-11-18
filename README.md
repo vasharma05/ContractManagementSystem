@@ -29,9 +29,9 @@ This section will show a form wherein the admin can enter the Details of the new
 EDIT/UPDATE SECTION
 In this section first the admin will select whose details are to be Updated and will select from the select box. After selecting one of these and entering the Unique ID he/she can view their current details and can edit the field he/she wants to update.
 
-![Edit Vendors](https://github.com/vasharma05/ContractManagementSystem/blob/master/Screenshots/Edit%20Vendors.PNG)
+![Edit Vendors](https://github.com/vasharma05/ContractManagementSystem/blob/master/Screenshots/Edit%20Vendor.PNG)
 
-![Edit Clients](https://github.com/vasharma05/ContractManagementSystem/blob/master/Screenshots/Edit%20Clients.PNG)
+![Edit Clients](https://github.com/vasharma05/ContractManagementSystem/blob/master/Screenshots/Edit%20Client.PNG)
 
 ![Edit Clients](https://github.com/vasharma05/ContractManagementSystem/blob/master/Screenshots/Edit%20Client%20Open.PNG)
 
